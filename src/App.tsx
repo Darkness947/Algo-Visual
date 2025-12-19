@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Sidebar } from './components/layout/Sidebar';
 import { Navbar } from './components/layout/Navbar';
@@ -14,8 +14,23 @@ import { Chatbot } from './components/Chatbot'; // Added import for Chatbot
 import './styles/global.css';
 
 const VisualizerPage = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { algorithm } = useVisualization();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setIsSidebarOpen(true);
+      } else {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="layout-container">
@@ -24,7 +39,7 @@ const VisualizerPage = () => {
       <main className="main-content">
         <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-        <div className="content-wrapper" style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        <div className="content-wrapper" style={{ display: 'flex', flex: 1, overflow: 'hidden', flexDirection: isMobile ? 'column' : 'row' }}>
           <div className="canvas-area" style={{ flex: 1, position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             {algorithm ? (
               algorithm.category === 'Graph' ? (
@@ -51,6 +66,22 @@ const VisualizerPage = () => {
 
           {algorithm && <CodeTracer />}
         </div>
+
+        {isSidebarOpen && window.innerWidth <= 768 && (
+          <div
+            className="sidebar-backdrop"
+            onClick={() => setIsSidebarOpen(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              zIndex: 40
+            }}
+          />
+        )}
 
         <ControlPanel />
       </main>

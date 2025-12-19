@@ -206,3 +206,29 @@
     /* Adjust based on your dark theme */
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
+@media (max-width: 768px) {
+
+    /* Disable expensive blur effects on mobile */
+    .floating-shape {
+        display: none;
+    }
+
+    .feature-card,
+    .step-card {
+        backdrop-filter: none;
+        background: var(--bg-secondary);
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        padding: 0 1rem;
+        line-height: 1.2;
+    }
+
+    .cta-button {
+        /* Optimize touch response */
+        touch-action: manipulation;
+        padding: 1rem 2rem;
+    }
+}

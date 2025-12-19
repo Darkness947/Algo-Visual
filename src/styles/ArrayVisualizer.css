@@ -29,6 +29,7 @@
 
 @media (max-width: 768px) {
     .bar-value {
-        display: none;
+        font-size: 0.6rem;
+        bottom: -20px;
     }
 }

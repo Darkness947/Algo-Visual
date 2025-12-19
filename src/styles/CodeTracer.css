@@ -93,3 +93,19 @@
 [data-theme="light"] .line-number {
     color: #94a3b8;
 }
+
+@media (max-width: 1024px) {
+    .code-tracer {
+        width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .code-tracer {
+        width: 100%;
+        height: 300px;
+        /* Fixed height at bottom or flexible? */
+        border-left: none;
+        border-top: 1px solid var(--bg-tertiary);
+    }
+}
