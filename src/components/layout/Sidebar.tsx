@@ -1,6 +1,8 @@
 import React from 'react';
-import { BarChart2, Search, GitGraph } from 'lucide-react';
+import { BarChart2, Search, GitGraph, Layers, Clock } from 'lucide-react';
 import { useVisualization } from '../../context/VisualizationContext';
+import { useLanguage } from '../../context/LanguageContext';
+import { algorithmNameMap } from '../../utils/algorithmMapping';
 import { bubbleSort } from '../../algorithms/sorting/bubbleSort';
 import { selectionSort } from '../../algorithms/sorting/selectionSort';
 import { insertionSort } from '../../algorithms/sorting/insertionSort';
@@ -22,11 +24,12 @@ import '../../styles/Sidebar.css';
 import logo from '../../assets/logo.png';
 
 interface SidebarProps {
-    isOpen?: boolean; // Made optional to fix potential type issues if not passed
+    isOpen?: boolean;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true }) => {
     const { setAlgorithm, algorithm } = useVisualization();
+    const { t } = useLanguage();
 
     return (
         <aside className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
@@ -40,7 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true }) => {
             <nav className="sidebar-nav">
                 <div className="nav-section">
                     <div className="nav-section-title">
-                        <span>Sorting</span>
+                        <span>{t('sorting')}</span>
                         <BarChart2 size={16} />
                     </div>
                     <ul className="nav-list">
@@ -48,56 +51,56 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true }) => {
                             className={`nav-item ${algorithm?.name === 'Bubble Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(bubbleSort)}
                         >
-                            Bubble Sort
+                            {t(algorithmNameMap['Bubble Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Selection Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(selectionSort)}
                         >
-                            Selection Sort
+                            {t(algorithmNameMap['Selection Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Insertion Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(insertionSort)}
                         >
-                            Insertion Sort
+                            {t(algorithmNameMap['Insertion Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Merge Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(mergeSort)}
                         >
-                            Merge Sort
+                            {t(algorithmNameMap['Merge Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Quick Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(quickSort)}
                         >
-                            Quick Sort
+                            {t(algorithmNameMap['Quick Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Heap Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(heapSort)}
                         >
-                            Heap Sort
+                            {t(algorithmNameMap['Heap Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Counting Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(countingSort)}
                         >
-                            Counting Sort
+                            {t(algorithmNameMap['Counting Sort'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Radix Sort' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(radixSort)}
                         >
-                            Radix Sort
+                            {t(algorithmNameMap['Radix Sort'])}
                         </li>
                     </ul>
                 </div>
 
                 <div className="nav-section">
                     <div className="nav-section-title">
-                        <span>Searching</span>
+                        <span>{t('searching')}</span>
                         <Search size={16} />
                     </div>
                     <ul className="nav-list">
@@ -105,20 +108,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true }) => {
                             className={`nav-item ${algorithm?.name === 'Linear Search' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(linearSearch)}
                         >
-                            Linear Search
+                            {t(algorithmNameMap['Linear Search'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Binary Search' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(binarySearch)}
                         >
-                            Binary Search
+                            {t(algorithmNameMap['Binary Search'])}
                         </li>
                     </ul>
                 </div>
 
                 <div className="nav-section">
                     <div className="nav-section-title">
-                        <span>Graphs</span>
+                        <span>{t('graphs')}</span>
                         <GitGraph size={16} />
                     </div>
                     <ul className="nav-list">
@@ -126,61 +129,61 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true }) => {
                             className={`nav-item ${algorithm?.name === 'BFS' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(bfs)}
                         >
-                            Breadth-First Search
+                            {t(algorithmNameMap['Breadth-First Search'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'DFS' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(dfs)}
                         >
-                            Depth-First Search
+                            {t(algorithmNameMap['Depth-First Search'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === "Dijkstra's Algorithm" ? 'active' : ''}`}
                             onClick={() => setAlgorithm(dijkstra)}
                         >
-                            Dijkstra's Algorithm
+                            {t(algorithmNameMap["Dijkstra's Algorithm"])}
                         </li>
                     </ul>
                 </div>
 
                 <div className="nav-section">
                     <div className="nav-section-title">
-                        <span>Dynamic Programming</span>
-                        <GitGraph size={16} />
+                        <span>{t('dp')}</span>
+                        <Layers size={16} />
                     </div>
                     <ul className="nav-list">
                         <li
                             className={`nav-item ${algorithm?.name === 'Longest Common Subsequence' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(lcs)}
                         >
-                            LCS
+                            {t(algorithmNameMap['Longest Common Subsequence'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === '0/1 Knapsack' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(knapsack)}
                         >
-                            0/1 Knapsack
+                            {t(algorithmNameMap['0/1 Knapsack'])}
                         </li>
                     </ul>
                 </div>
 
                 <div className="nav-section">
                     <div className="nav-section-title">
-                        <span>Greedy Algorithms</span>
-                        <GitGraph size={16} />
+                        <span>{t('greedy')}</span>
+                        <Clock size={16} />
                     </div>
                     <ul className="nav-list">
                         <li
                             className={`nav-item ${algorithm?.name === 'Activity Selection' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(activitySelection)}
                         >
-                            Activity Selection
+                            {t(algorithmNameMap['Activity Selection'])}
                         </li>
                         <li
                             className={`nav-item ${algorithm?.name === 'Counting Money' ? 'active' : ''}`}
                             onClick={() => setAlgorithm(coinChange)}
                         >
-                            Counting Money
+                            {t(algorithmNameMap['Counting Money'])}
                         </li>
                     </ul>
                 </div>

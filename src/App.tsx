@@ -11,6 +11,7 @@ import { GreedyVisualizer } from './components/visualizers/GreedyVisualizer';
 import { CodeTracer } from './components/CodeTracer';
 import { HomePage } from './pages/HomePage';
 import { Chatbot } from './components/Chatbot'; // Added import for Chatbot
+import { LanguageProvider } from './context/LanguageContext';
 import './styles/global.css';
 
 const VisualizerPage = () => {
@@ -91,15 +92,17 @@ const VisualizerPage = () => {
 
 function App() {
   return (
-    <Router>
-      <VisualizationProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/visualizer" element={<VisualizerPage />} />
-        </Routes>
-        <Chatbot />
-      </VisualizationProvider>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <VisualizationProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/visualizer" element={<VisualizerPage />} />
+          </Routes>
+          <Chatbot />
+        </VisualizationProvider>
+      </Router>
+    </LanguageProvider>
   );
 }
 

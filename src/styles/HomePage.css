@@ -232,3 +232,55 @@
         padding: 1rem 2rem;
     }
 }
+/* Animation Sections */
+.did-you-know-section {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.community-section {
+    position: relative;
+}
+
+.circular-text-container {
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Mobile Adjustments for Animations */
+@media (max-width: 768px) {
+    .circular-text-container {
+        transform: scale(0.8);
+    }
+    
+    .antigravity-container {
+        display: none; /* Hide on mobile for performance */
+    }
+}
+
+
+.social-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.social-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+

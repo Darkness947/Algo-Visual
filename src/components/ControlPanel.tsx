@@ -1,5 +1,6 @@
 import React from 'react';
 import { useVisualization } from '../context/VisualizationContext';
+import { useLanguage } from '../context/LanguageContext';
 import { Play, Pause, SkipBack, SkipForward, RotateCcw, RefreshCw } from 'lucide-react';
 import '../styles/ControlPanel.css';
 
@@ -14,15 +15,16 @@ export const ControlPanel: React.FC = () => {
         speed,
         setSpeed
     } = useVisualization();
+    const { t } = useLanguage();
 
     return (
         <div className="control-panel">
             <div className="control-group">
-                <button onClick={() => randomizeArray()} className="btn btn-secondary" title="Randomize Data">
+                <button onClick={() => randomizeArray()} className="btn btn-secondary" title={t('generateNew')}>
                     <RefreshCw size={20} />
-                    <span>New Data</span>
+                    <span>{t('generateNew')}</span>
                 </button>
-                <button onClick={reset} className="btn btn-secondary" title="Reset to Start">
+                <button onClick={reset} className="btn btn-secondary" title={t('reset')}>
                     <RotateCcw size={20} />
                 </button>
             </div>
@@ -31,7 +33,7 @@ export const ControlPanel: React.FC = () => {
                 <button onClick={prevStep} className="btn btn-icon" title="Previous Step">
                     <SkipBack size={24} />
                 </button>
-                <button onClick={togglePlay} className="btn btn-primary btn-play" title={isPlaying ? "Pause" : "Play"}>
+                <button onClick={togglePlay} className="btn btn-primary btn-play" title={isPlaying ? t('pause') : t('play')}>
                     {isPlaying ? <Pause size={28} /> : <Play size={28} />}
                 </button>
                 <button onClick={nextStep} className="btn btn-icon" title="Next Step">
@@ -40,7 +42,7 @@ export const ControlPanel: React.FC = () => {
             </div>
 
             <div className="control-group speed-control">
-                <label htmlFor="speed-slider">Speed</label>
+                <label htmlFor="speed-slider">{t('speed')}</label>
                 <input
                     id="speed-slider"
                     type="range"

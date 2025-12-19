@@ -1,0 +1,39 @@
+.typewriter-container {
+    display: inline-flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    min-height: 1.5em;
+}
+
+.typewriter-text {
+    white-space: pre;
+}
+
+.typewriter-cursor {
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+    color: var(--text-primary);
+}
+
+.typewriter-container.rtl {
+    direction: rtl;
+}
+
+.typewriter-container.rtl .typewriter-cursor {
+    margin-left: 0;
+    margin-right: 2px;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
